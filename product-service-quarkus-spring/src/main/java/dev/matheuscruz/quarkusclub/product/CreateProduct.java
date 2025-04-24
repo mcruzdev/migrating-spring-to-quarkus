@@ -17,7 +17,7 @@ public class CreateProduct {
     final RunInTransaction runInTx;
 
     public CreateProduct(ProductRepository productRepository, ProductProducer productProducer,
-                         ObjectMapper objectMapper, RunInTransaction runInTx) {
+            ObjectMapper objectMapper, RunInTransaction runInTx) {
         this.productRepository = productRepository;
         this.productProducer = productProducer;
         this.objectMapper = objectMapper;

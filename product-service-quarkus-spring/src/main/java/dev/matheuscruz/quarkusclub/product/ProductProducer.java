@@ -22,11 +22,9 @@ public class ProductProducer {
 
     public void send(String message) {
         KafkaProducer<String, String> producer = this.kafkaClientService.getProducer("product.producer");
-        producer.send(new ProducerRecord<>(topicName, message))
-                .subscribeAsCompletionStage()
-                .thenAccept(metadata -> {
-                    LOGGER.info("✅ [offset:{}][partition:{}] Message sent to topic: {}", metadata.offset(),
-                            metadata.partition(), metadata.topic());
-                });
+        producer.send(new ProducerRecord<>(topicName, message)).subscribeAsCompletionStage().thenAccept(metadata -> {
+            LOGGER.info("✅ [offset:{}][partition:{}] Message sent to topic: {}", metadata.offset(),
+                    metadata.partition(), metadata.topic());
+        });
     }
 }

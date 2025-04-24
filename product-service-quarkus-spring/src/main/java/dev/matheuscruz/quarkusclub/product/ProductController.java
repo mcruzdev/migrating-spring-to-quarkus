@@ -31,9 +31,9 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductOutput>> getAllProducts() {
         // TODO: implement pagination
-        return ResponseEntity
-                .ok(this.getProducts.execute());
+        return ResponseEntity.ok(this.getProducts.execute());
     }
+
     public record CreateProductRequest(String name, BigDecimal price, Integer stock) {
     }
 }

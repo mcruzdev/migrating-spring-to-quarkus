@@ -14,8 +14,7 @@ public class GetProducts {
     }
 
     public List<ProductOutput> execute() {
-        return this.productRepository.findAll().stream().map(product -> new ProductOutput(
-                product.getId(), product.getName(), product.getPrice(), product.getStock()
-        )).toList();
+        return this.productRepository.findAll().stream().map(product -> new ProductOutput(product.getId(),
+                product.getName(), product.getPrice(), product.getStock())).toList();
     }
 }
