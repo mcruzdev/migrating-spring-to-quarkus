@@ -21,7 +21,7 @@ public class Product {
     protected Product() {
     }
 
-    Product(final String name, final BigDecimal price, final Integer stock) {
+    Product(String name, BigDecimal price, Integer stock) {
         // some domain validations here...
         this.id = UUID.randomUUID().toString();
         this.name = name;

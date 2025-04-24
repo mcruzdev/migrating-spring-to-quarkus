@@ -14,7 +14,7 @@ public class ProductController {
     private final CreateProduct createProduct;
     private final GetProducts getProducts;
 
-    public ProductController(final CreateProduct createProduct, final GetProducts getProducts) {
+    public ProductController(CreateProduct createProduct, GetProducts getProducts) {
         this.createProduct = createProduct;
         this.getProducts = getProducts;
     }

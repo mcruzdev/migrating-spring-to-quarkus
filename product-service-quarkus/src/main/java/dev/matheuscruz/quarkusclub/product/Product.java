@@ -12,16 +12,16 @@ import java.util.UUID;
 public class Product {
 
     @Id
-    private String id;
-    private String name;
-    private BigDecimal price;
-    private Integer stock;
+    String id;
+    String name;
+    BigDecimal price;
+    Integer stock;
 
     // necessary for JPA
     protected Product() {
     }
 
-    public Product(String name, BigDecimal price, Integer stock) {
+    Product(String name, BigDecimal price, Integer stock) {
         // TODO: add some domain validations here...
         this.id = UUID.randomUUID().toString();
         this.name = name;

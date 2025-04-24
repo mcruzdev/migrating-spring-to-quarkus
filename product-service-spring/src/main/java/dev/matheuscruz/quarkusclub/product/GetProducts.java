@@ -9,7 +9,7 @@ public class GetProducts {
 
     private final ProductRepository productRepository;
 
-    public GetProducts(final ProductRepository productRepository) {
+    public GetProducts(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

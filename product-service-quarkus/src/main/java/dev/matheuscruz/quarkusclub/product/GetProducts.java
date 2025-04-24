@@ -1,14 +1,16 @@
 package dev.matheuscruz.quarkusclub.product;
 
-import org.springframework.stereotype.Component;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
-@Component
+@ApplicationScoped
 public class GetProducts {
 
-    private final ProductRepository productRepository;
+    final ProductRepository productRepository;
 
+    @Inject
     public GetProducts(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
