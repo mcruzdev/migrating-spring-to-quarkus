@@ -33,7 +33,7 @@ public class CreateProduct {
             String message = this.objectMapper.writeValueAsString(product);
             this.productProducer.send(message);
         } catch (Exception e) {
-            LOGGER.error("There is no resiliency, good luck friend.", e);
+            LOGGER.error("Fire and regret, good luck friend.", e);
         }
 
         return new Output(product.getId());

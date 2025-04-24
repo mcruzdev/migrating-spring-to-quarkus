@@ -10,11 +10,11 @@ import java.math.BigDecimal;
 @Service
 public class CreateProduct {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreateProduct.class);
-    private final ProductRepository productRepository;
-    private final ProductProducer productProducer;
-    private final ObjectMapper objectMapper;
-    private final RunInTransaction runInTx;
+    static final Logger LOGGER = LoggerFactory.getLogger(CreateProduct.class);
+    final ProductRepository productRepository;
+    final ProductProducer productProducer;
+    final ObjectMapper objectMapper;
+    final RunInTransaction runInTx;
 
     public CreateProduct(ProductRepository productRepository, ProductProducer productProducer,
                          ObjectMapper objectMapper, RunInTransaction runInTx) {
@@ -33,7 +33,7 @@ public class CreateProduct {
             String message = this.objectMapper.writeValueAsString(product);
             this.productProducer.send(message);
         } catch (Exception e) {
-            LOGGER.error("There is no resiliency, good luck friend.", e);
+            LOGGER.error("Fire and regret, good luck friend.", e);
         }
 
         return new Output(product.getId());

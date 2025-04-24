@@ -1,48 +1,39 @@
 package dev.matheuscruz.quarkusclub.product;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
     private final CreateProduct createProduct;
-    private final ProductRepository productRepository;
+    private final GetProducts getProducts;
 
-    public ProductController(CreateProduct createProduct, ProductRepository productRepository) {
+    public ProductController(final CreateProduct createProduct, final GetProducts getProducts) {
         this.createProduct = createProduct;
-        this.productRepository = productRepository;
+        this.getProducts = getProducts;
     }
 
+    // TODO: add validation with bean validation
     @PostMapping
     public ResponseEntity<Void> addProduct(@RequestBody CreateProductRequest request) {
         CreateProduct.Output output = this.createProduct
                 .execute(new CreateProduct.Input(request.name(), request.price(), request.stock()));
         return ResponseEntity.created(URI.create("/api/v1/products/%s".formatted(output.id()))).build();
+        // TODO: implement /api/v1/products/{productId}
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<GetProductResponse> getProductById(@PathVariable("id") String id) {
-        Product product = this.productRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    @GetMapping
+    public ResponseEntity<List<ProductOutput>> getAllProducts() {
+        // TODO: implement pagination
         return ResponseEntity
-                .ok(new GetProductResponse(product.getId(), product.getName(), product.getPrice(), product.getStock()));
+                .ok(this.getProducts.execute());
     }
-
     public record CreateProductRequest(String name, BigDecimal price, Integer stock) {
-    }
-
-    public record GetProductResponse(String id, String name, BigDecimal price, Integer stock) {
     }
 }
